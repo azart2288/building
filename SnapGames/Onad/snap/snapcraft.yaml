@@ -1,0 +1,76 @@
+name: onad
+version: "1.0"
+summary: My Awesome Game
+description: |
+  This is my amazing game which will clearly win awards.
+  Shoot the bad guys.
+  Collect the coins.
+  Avoid the traps.
+base: core18
+confinement: strict
+parts:
+  onad:
+    after: [desktop-gtk2]
+    plugin: dump
+    source: snap/local
+    stage-packages:
+      - libgl1-mesa-dri
+      - libglu1-mesa
+      - libgl1-mesa-glx
+      - libgles2-mesa
+      - libflac8
+      - libxcursor1
+      - libxi6
+      - libxinerama1
+      - libxrandr2
+      - libxrender1
+      - libasound2
+      - libasyncns0
+      - libogg0
+      - libpulse0
+      - libsndfile1
+      - libtheora0
+      - libvorbis0a
+      - libvorbisenc2
+      - libvorbisfile3
+      - libwebp6
+  desktop-gtk2:
+    build-packages:
+      - build-essential
+    make-parameters:
+      - FLAVOR=gtk2
+    plugin: make
+    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
+    source-subdir: gtk
+    stage-packages:
+      - libxkbcommon0
+      - ttf-ubuntu-font-family
+      - dmz-cursor-theme
+      - light-themes
+      - adwaita-icon-theme
+      - gnome-themes-standard
+      - shared-mime-info
+      - libgtk2.0-0
+      - libgdk-pixbuf2.0-0
+      - libglib2.0-bin
+      - libgtk2.0-bin
+      - unity-gtk2-module
+      - locales-all
+      - libappindicator1
+      - xdg-user-dirs
+      - ibus-gtk
+      - libibus-1.0-5
+apps:
+  onad:
+    command: desktop-launch $SNAP/ONADLinux.x86_64
+    environment:
+      LD_LIBRARY_PATH: "$SNAP/ONADLinux_Data/Plugins/x86_64:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio:$LD_LIBRARY_PATH"
+    plugs:
+      - x11
+      - opengl
+      - network
+      - network-bind
+      - desktop
+      - desktop-legacy
+      - pulseaudio
+      - joystick

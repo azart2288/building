@@ -1,0 +1,15 @@
+[Desktop Entry]
+
+Name=Onad
+
+Comment=My Awesome Game
+
+Exec=mygame
+
+Icon=${SNAP}/meta/gui/icon.png
+
+Type=Application
+
+Terminal=false
+
+Categories=Game;
